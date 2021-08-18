@@ -1,0 +1,141 @@
+.container {
+  margin: 50px auto;
+  padding: 20px;
+  width: 50%;
+  background-color: #f84d6f;
+  background: linear-gradient(#f84d6f, #9198e5);
+  border-radius: 20px;
+  font-family: "Mali", cursive;
+}
+.greetings {
+  border: 2px solid #ccc;
+  background-color: rgb(255 255 255);
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin: 20px 20px;
+  text-align: center;
+}
+#search-form {
+  margin: 8px 0;
+  display: inline-block;
+  position: static;
+}
+.search,
+.go-btn {
+  padding: 12px 10px 12px 32px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+.go-btn {
+  padding: 12px;
+  margin: 8px;
+}
+
+.fa-search {
+  position: relative;
+  right: -42px;
+  opacity: 0.6;
+  max-width: fit-content;
+}
+.date {
+  position: none;
+  padding: 0 40px;
+  opacity: 0.75;
+}
+
+.first-half-content,
+.second-content {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  width: 50%;
+  margin: 0 auto;
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 22%);
+  transition: all 1s ease-out;
+}
+.city-name {
+  margin: 10px 10px;
+  font-weight: bolder;
+  font-size: 32px;
+}
+#actual-temp1 {
+  padding: 8px;
+  font-size: 32px;
+}
+.temp-emoji {
+  font-size: 38px;
+  display: grid;
+}
+.temp {
+  opacity: 0.8;
+  font-size: 38px;
+}
+.degrees,
+.degrees-c,
+.degrees-f {
+  text-decoration: none;
+  font-size: 18px;
+  position: relative;
+  top: -10px;
+}
+.degree-seperator {
+  border-left: solid 1px #70757a;
+  margin: 0 0 28px 0;
+
+  position: relative;
+  top: -10px;
+}
+.emoji {
+  border-top: 1px dashed #29313a7a;
+  font-size: 68px;
+}
+.descriptions {
+  opacity: 0.85;
+}
+.first-swipe-two,
+.second-swipe-two,
+.first-swipe-one,
+.second-swipe-one {
+  font-family: "Zen Tokyo Zoo", cursive;
+  font-style: italic;
+  text-align: right;
+  margin-top: 50px;
+  margin-right: 20px;
+  font-size: 38px;
+  opacity: 0.75;
+  transition: margin-right 2s, color 1s;
+}
+.first-half-content-text:hover {
+  transition: margin-left 2s ease-in-out;
+}
+.row-time,
+#display-time {
+  display: block;
+  text-align: center;
+  padding: 20px;
+}
+.recomendation {
+  text-align: left;
+  font-size: 16px;
+  font-style: italic;
+  opacity: 0.75;
+  padding: 10px 0 0 10px;
+}
+
+.second-content {
+  border-radius: 8px;
+}
+
+.fa-angle-double-right,
+.fa-angle-double-left {
+  opacity: 0.55;
+}
+
+.fa-angle-double-right:hover {
+  transform: translate(50%, 0);
+}
+
+.fa-angle-double-left:hover {
+  transform: translate(-50%, 0);
+}
