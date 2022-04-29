@@ -1,4 +1,6 @@
-let actualTemp1 = document.querySelector("#actual-temp1");
+window.addEventListener("DOMContentLoaded",(e)=>{
+  console.log("ready!");
+  let actualTemp1 = document.querySelector("#actual-temp1");
 
 function updateDate(day, month, date) {
   let updatedDate = `${todaysDate} ${month}, ${day}`;
@@ -41,13 +43,13 @@ updateTime.innerHTML = `${date.getHours()} : ${date.getMinutes()} : ${date.getSe
 function updateCity(event) {
   event.preventDefault();
   let city = "Toronto";
-  console.log(city);
+  
   city = document.querySelector("#city-input").value;
   if (city === "") {
     city = "Toronto";
   }
 
-  console.log(`update city ko:${city}`);
+
   searchCity(city);
 }
 let form = document.querySelector("#search-form");
@@ -56,7 +58,7 @@ form.addEventListener("submit", updateCity);
 function searchCity(city) {
   let apiKey = "82f1c4607193844c69603013cf7fd3a3";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
+
   axios.get(apiUrl).then(displayWeatherCondition);
 }
 function displayWeatherCondition(response) {
@@ -67,7 +69,9 @@ function displayWeatherCondition(response) {
   let c_deg_selected = document.querySelector(".degrees-c");
   let humidity = document.querySelector(".humidity");
   let desc = document.querySelector(".description");
-
+  let emoji=document.querySelector(".emoji");
+  let weatherDescription=response.data.weather[0].description;
+console.log("response.data",response.data);
   if (updateThisName.length >= 10) {
     console.log("yes longer than 10");
     document.getElementById("current-city-name").style.fontSize = "26px";
@@ -87,7 +91,19 @@ function displayWeatherCondition(response) {
 
   humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
 
-  desc.innerHTML = `Description: ${response.data.weather[0].description}`;
+  desc.innerHTML = `Description: ${weatherDescription}`;
+  if (weatherDescription.includes("clear")){
+    emoji.innerHTML="☀️";
+ 
+  }
+  if (weatherDescription.includes("cloud")){
+    emoji.innerHTML="⛅️";
+   
+  }
+  if (weatherDescription.includes("rain")){
+    emoji.innerHTML="🌧";
+   
+  }
 }
 function showTempertaure(response) {
   let temperature = Math.ceil(response.data.main.temp);
@@ -151,3 +167,5 @@ navigator.geolocation.getCurrentPosition(function (position) {
   console.log(lon);
   // console.log(city_name);
 });
+
+})
