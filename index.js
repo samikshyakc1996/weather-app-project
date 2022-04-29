@@ -34,9 +34,8 @@ let months = [
 ];
 month = months[month];
 let update_date = document.querySelector("#updateDate");
-update_date.innerHTML = updateDate(day, month, date);
-
 let updateTime = document.querySelector("#display-time");
+update_date.innerHTML = updateDate(day, month, date);
 updateTime.innerHTML = `${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()}`;
 
 function updateCity(event) {
@@ -63,29 +62,31 @@ function searchCity(city) {
 function displayWeatherCondition(response) {
   document.querySelector("#actual-temp1").innerHTML = response.data.temp;
   let updateThisName = response.data.name;
+  let temp = Math.round(response.data.main.temp);
+  let f_deg_selected = document.querySelector(".degrees-f");
+  let c_deg_selected = document.querySelector(".degrees-c");
+  let humidity = document.querySelector(".humidity");
+  let desc = document.querySelector(".description");
+
   if (updateThisName.length >= 10) {
     console.log("yes longer than 10");
     document.getElementById("current-city-name").style.fontSize = "26px";
   }
   document.querySelector("#current-city-name").innerHTML = updateThisName;
-  let temp = Math.round(response.data.main.temp);
   document.querySelector("#actual-temp1").innerHTML = temp;
-  console.log(`temp liyeko:${temp}`);
-  let f_deg_selected = document.querySelector(".degrees-f");
-  console.log(`yo selected what ho:${f_deg_selected}`);
+
   f_deg_selected.addEventListener("click", function () {
     let f_temp = temp * 1.8 + 32;
     document.querySelector("#actual-temp1").innerHTML = Math.round(f_temp);
   });
-  let c_deg_selected = document.querySelector(".degrees-c");
-  console.log(`yo selected what ho:${c_deg_selected}`);
+
   c_deg_selected.addEventListener("click", function () {
     let c_temp = temp;
     document.querySelector("#actual-temp1").innerHTML = c_temp;
   });
-  let humidity = document.querySelector(".humidity");
+
   humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
-  let desc = document.querySelector(".description");
+
   desc.innerHTML = `Description: ${response.data.weather[0].description}`;
 }
 function showTempertaure(response) {
