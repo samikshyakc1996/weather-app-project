@@ -60,6 +60,7 @@ function searchCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayWeatherCondition);
+  displayForecast();
 }
 function displayWeatherCondition(response) {
   document.querySelector("#actual-temp1").innerHTML = response.data.temp;
@@ -104,14 +105,24 @@ console.log("response.data",response.data);
     emoji.innerHTML="🌧";
    
   }
+
+  getForecast(response.data.coord);
 }
+
+function getForecast(coordinates){
+  let apiKey = "82f1c4607193844c69603013cf7fd3a3";
+  let apiUrl =  `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+   axios.get(apiUrl).then(displayForecast);
+  
+}
+
 function showTempertaure(response) {
   let temperature = Math.ceil(response.data.main.temp);
-  console.log(`Response is: ${response}`);
-  console.log(temperature);
+  
   actualTemp1.innerHTML = `${temperature}`;
 
-  console.log(`Yo kaha ko ho:${temperature}`);
+ 
 }
 
 function changeGreetings(date) {
@@ -172,34 +183,41 @@ navigator.geolocation.getCurrentPosition(function (position) {
 
 //forecast
 
-
-function displayForecast(){
+function formatDay(timestamp){
+  let date= new Date(timestamp*1000);
+  let day=date.getDay();
+  let days=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  return days[day];
+}
+function displayForecast(response){
+  
+  let forecastDays=response.data.daily;
   let forecast=document.querySelector("#forecast");
-  let days=["Thu", "Fri","Sat", "Sun"]
-let forecastHTML=`<div class="row">`;
-  days.forEach(function(day){
 
-forecastHTML=forecastHTML+`
+let forecastHTML=`<div class="row">`;
+  forecastDays.forEach(function(forecastDay,index){
+    if(index<6){
+    forecastHTML=forecastHTML+`
 
          <div class="col-2">         
-           <div class="weather-forecast-day">${day}</div>
-           <img src="https://ssl.gstatic.com/onebox/weather/48/rain.png " alt="forecast-emoji" width="36">
+           <div class="weather-forecast-day">${formatDay(forecastDay.dt)}</div>
+           <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"  alt="forecast-emoji" width="36">
           <div class="weather-forecast-temperatures">
            <span class="weather-forecast-temp-max">
-           18&deg;</span>
+           ${Math.round(forecastDay.temp.max)}&deg;</span>
            <span class="weather-forecast-temp-min">
-            12&deg;</span>
+           ${Math.round(forecastDay.temp.min)}&deg;</span>
           </div>
         
             
 `;
-forecastHTML=forecastHTML+`</div>`;
+    }
+    forecastHTML=forecastHTML+`</div>`;
   })
 
-
+  
 forecast.innerHTML=forecastHTML;
-
+  
 
 }
 
-displayForecast();
