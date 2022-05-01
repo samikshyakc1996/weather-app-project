@@ -169,3 +169,37 @@ navigator.geolocation.getCurrentPosition(function (position) {
 });
 
 })
+
+//forecast
+
+
+function displayForecast(){
+  let forecast=document.querySelector("#forecast");
+  let days=["Thu", "Fri","Sat", "Sun"]
+let forecastHTML=`<div class="row">`;
+  days.forEach(function(day){
+
+forecastHTML=forecastHTML+`
+
+         <div class="col-2">         
+           <div class="weather-forecast-day">${day}</div>
+           <img src="https://ssl.gstatic.com/onebox/weather/48/rain.png " alt="forecast-emoji" width="36">
+          <div class="weather-forecast-temperatures">
+           <span class="weather-forecast-temp-max">
+           18&deg;</span>
+           <span class="weather-forecast-temp-min">
+            12&deg;</span>
+          </div>
+        
+            
+`;
+forecastHTML=forecastHTML+`</div>`;
+  })
+
+
+forecast.innerHTML=forecastHTML;
+
+
+}
+
+displayForecast();
