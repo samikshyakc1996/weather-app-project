@@ -44,8 +44,8 @@
   opacity: 0.75;
 }
 
-.first-half-content,
-.second-content {
+.main-content
+{
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 50px;
@@ -53,6 +53,7 @@
   margin: 0 auto;
   box-shadow: 5px 5px 10px rgb(0 0 0 / 22%);
   transition: all 1s ease-out;
+  padding: 0.5rem 2rem;
 }
 .city-name {
   margin: 10px 10px;
@@ -93,7 +94,7 @@
 .descriptions {
   opacity: 0.85;
 }
-.first-swipe-two,
+/* .first-swipe-two,
 .second-swipe-two,
 .first-swipe-one,
 .second-swipe-one {
@@ -105,8 +106,8 @@
   font-size: 38px;
   opacity: 0.75;
   transition: margin-right 2s, color 1s;
-}
-.first-half-content-text:hover {
+} */
+.main-content-text:hover {
   transition: margin-left 2s ease-in-out;
 }
 .row-time,
@@ -127,18 +128,6 @@
   border-radius: 8px;
 }
 
-.fa-angle-double-right,
-.fa-angle-double-left {
-  opacity: 0.55;
-}
-
-.fa-angle-double-right:hover {
-  transform: translate(50%, 0);
-}
-
-.fa-angle-double-left:hover {
-  transform: translate(-50%, 0);
-}
 .weather-forecast{
   margin-top: 20px;
   text-align: center;

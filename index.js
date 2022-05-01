@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded",(e)=>{
-  console.log("ready!");
+  // console.log("ready!");
   let actualTemp1 = document.querySelector("#actual-temp1");
 
 function updateDate(day, month, date) {
@@ -40,22 +40,25 @@ let updateTime = document.querySelector("#display-time");
 update_date.innerHTML = updateDate(day, month, date);
 updateTime.innerHTML = `${date.getHours()} : ${date.getMinutes()} : ${date.getSeconds()}`;
 
-function updateCity(event) {
-  event.preventDefault();
-  let city = "Toronto";
-  
-  city = document.querySelector("#city-input").value;
+// Toronto as a default city
+let city = "Toronto";
+
+city = document.querySelector("#city-input").value;
   if (city === "") {
     city = "Toronto";
   }
+  
 
-
+function updateCity(event) {
+  event.preventDefault();  
+  city = document.querySelector("#city-input").value;
   searchCity(city);
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", updateCity);
-
+searchCity(city);
 function searchCity(city) {
+
   let apiKey = "82f1c4607193844c69603013cf7fd3a3";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -72,13 +75,18 @@ function displayWeatherCondition(response) {
   let desc = document.querySelector(".description");
   let emoji=document.querySelector(".emoji");
   let weatherDescription=response.data.weather[0].description;
-console.log("response.data",response.data);
+// console.log("response.data",response.data);
   if (updateThisName.length >= 10) {
     console.log("yes longer than 10");
     document.getElementById("current-city-name").style.fontSize = "26px";
   }
   document.querySelector("#current-city-name").innerHTML = updateThisName;
   document.querySelector("#actual-temp1").innerHTML = temp;
+
+ 
+  emoji.innerHTML=`
+  <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" alt="current weather icon">`;
+
 
   f_deg_selected.addEventListener("click", function () {
     let f_temp = temp * 1.8 + 32;
@@ -93,20 +101,10 @@ console.log("response.data",response.data);
   humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
 
   desc.innerHTML = `Description: ${weatherDescription}`;
-  if (weatherDescription.includes("clear")){
-    emoji.innerHTML="☀️";
- 
-  }
-  if (weatherDescription.includes("cloud")){
-    emoji.innerHTML="⛅️";
-   
-  }
-  if (weatherDescription.includes("rain")){
-    emoji.innerHTML="🌧";
-   
-  }
+  
 
   getForecast(response.data.coord);
+  changeGreetings(date);
 }
 
 function getForecast(coordinates){
@@ -117,15 +115,16 @@ function getForecast(coordinates){
   
 }
 
-function showTempertaure(response) {
-  let temperature = Math.ceil(response.data.main.temp);
+// function showTempertaure(response) {
+//   let temperature = Math.ceil(response.data.main.temp);
   
-  actualTemp1.innerHTML = `${temperature}`;
+//   actualTemp1.innerHTML = `${temperature}`;
 
  
-}
+// }
 
 function changeGreetings(date) {
+  
   let change_greetings = document.querySelector(".greetings");
   if (date.getHours() > 0 && date.getHours() <= 11) {
     change_greetings.innerHTML = "Good Morning! ☀️";
@@ -152,7 +151,7 @@ function changeGreetings(date) {
     ).style.background = `linear-gradient(rgb(223 164 0 / 83%), rgb(0 14 188 / 41%))`;
   }
 }
-changeGreetings(date);
+
 
 let degrees_selected_c = document.querySelectorAll(".degrees-c");
 degrees_selected_c.forEach(function (e) {
@@ -176,7 +175,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
   lat = position.coords.latitude;
   console.log(lat);
   console.log(lon);
-  // console.log(city_name);
+ 
 });
 
 })
